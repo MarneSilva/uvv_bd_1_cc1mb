@@ -18,7 +18,7 @@ com extremo detalhamento, pode ocorrer o risco dos scripts não funcionarem da m
    6. Insira a senha que se encontra no conteúdo do arquivo 'SQL Script 1.sql', composta de '12345'.
    7. Já com o novo usuário logado, apenas copie e cole o conteúdo do arquivo 'SQL Script 2.sql', para que seja criado o próprio banco de dados.
    8. Por final, teste as funções de delete, update, create, alter, etc. para que seja possível este usuário realizar todas as operações que sejam necessárias com as informações no banco.
-   9. Apenas aproveita e dê uma olhada no conteúdo das tabelas com o comando select.
+   9. Apenas aproveite e dê uma olhada no conteúdo das tabelas com o comando select.
 
    Seguindo estes passos, é garantido a conclusão do procedimento correto para a execução dos scripts criados por mim, como também a sua funcionalidade planejada.
  
