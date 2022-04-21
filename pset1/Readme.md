@@ -8,6 +8,9 @@ uma melhor organização sob seus elementos que compõem o conteúdo apresentado
 considerando os scripts que não são direcionados para o mesmo objetivo. P. e:
 
 __Script Oracle__
+
+
+
 __Script PostgreSQL__
 
    Portanto, um subdiretório é considerado um elemento essencial para a organização de trabalhos Git complexos, nos quais é necessário a separação de diversas pastas para diferentes
