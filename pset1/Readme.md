@@ -7,11 +7,11 @@
 uma melhor organização sob seus elementos que compõem o conteúdo apresentado. Um exemplo clássico seria separação de arquivos script para diferentes tipos de conteúdos, ou seja,
 considerando os scripts que não são direcionados para o mesmo objetivo. P. e:
 
-__Script Oracle__
+__*Script Oracle*__
 
 
 
-__Script PostgreSQL__
+__*Script PostgreSQL*__
 
    Portanto, um subdiretório é considerado um elemento essencial para a organização de trabalhos Git complexos, nos quais é necessário a separação de diversas pastas para diferentes
    contextos.
