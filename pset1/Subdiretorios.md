@@ -1,7 +1,7 @@
 # SUBDIRETÓRIOS
 ## Uma breve explicação sobre o que são subdiretórios, e para quê utilizar um.
 
-- Subdiretórios.
+- __Subdiretórios__.
 
   Subdiretório são pastas separadas dentro do diretório original de seu repositório Git. Estas pastas têm o objetivo de dividir seções em seu repositório Git, a fim de garantir
 uma melhor organização sob seus elementos que compõem o conteúdo apresentado. Um exemplo clássico seria separação de arquivos script para diferentes tipos de conteúdos, ou seja,
