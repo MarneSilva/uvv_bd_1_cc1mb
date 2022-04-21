@@ -1,5 +1,5 @@
 # SUBDIRETÓRIOS
-## Uma breve explicação sobre o que é um subdiretórios, e para quê utilizar um.
+## Uma breve explicação sobre o que é são subdiretórios, e para quê utilizar um.
 
 - Subdiretórios.
 
