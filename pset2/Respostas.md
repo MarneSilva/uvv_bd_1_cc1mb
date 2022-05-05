@@ -38,3 +38,12 @@
   where sexo = 'M';
   
   Depois de executar estes dois comandos, o MariaDB retornará valores sobre o resultado do cálculo, demonstrando que as médias são: 31.000,00 para as mulheres, e para os homens, 37.600,00.
+  
+# Questão 3
+  
+  Para o Marne do futuro que ainda vai anotar a resposta no dia depois: É preciso realizar uma operação de junção de tabelas, a inner join, consistindo também na criação de uma coluna que liste a idade na tabela funcionario, assim como tem que calcular a idade dos funcionario subtraindo a data de nascimento deles com a data de hoje, utilizando o comando 'select datediff'. Além disso, também é necessário arredondar as idades por meio do comando 'select ceil(numero) from tabela'.
+  
+# Questão 4
+
+ Ideias para esta questão: create procedure Aumentar_Porcentagem(INOUT numero INT) begin set salario = salario * 0.35; end$$ delimiter;
+ Uma procedure que aplica uma operação matemática em uma variável. Agora só falta saber como ativar a variável, e mostrar as condições de quando chamar.
