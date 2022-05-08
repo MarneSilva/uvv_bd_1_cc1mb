@@ -78,7 +78,7 @@
    
    Conclusivamente, executaremos esta sequência de comandos para todos os funcionários da tabela 'funcionario', tanto como o cálculo de suas respectivas idades, como o arredondamento e a atualização dos valores no campo 'idade'. Realizando isso, agora só é preciso realizar a projeção das informações que desejamos, e para isso, temos de juntar uma tabela à outra, fazendo uso do comando 'inner join', veja:
    
-   SELECT departamento.nome_departamento, funcionario.primeiro_nome, funcionario.nome_meio, funcionario.ultimo_nome, funcionario.data_nascimento, funcionario.idade, funcionario.salario
+   SELECT CONCAT(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) AS "nome_completo", departamento.nome_departamento, funcionario.data_nascimento, funcionario.idade, funcionario.salario
 FROM departamento 
 INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_departamento;
 
@@ -86,11 +86,28 @@ INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_
   
 # Questão 4
 
- Ideias para esta questão: create procedure Aumentar_Porcentagem(INOUT numero INT) begin set salario = salario * 0.35; end$$ delimiter;
- Uma procedure que aplica uma operação matemática em uma variável. Agora só falta saber como ativar a variável, e mostrar as condições de quando chamar.
+   Primeiramente, para projetarmos o reajuste de salário junto as informações que também queremos, é necessário criar uma coluna, dentro da tabela funcionario, para que sejam armazenadas os dados dos reajustes salariais. Esta ação consiste em um comando básico de manipulação de dados do MySQL, o comando ALTER TABLE. Dando sequência, o comando há de ter esta estrutura:
  
- 
- 
- 1° passo:
- alter table funcionario
-    -> add column salario_reajustado varchar(50);
+   ALTER TABLE funcionario
+   ADD COLUMN salario_reajustado decimal(10,2);
+   
+   É importante notar que a coluna nova deve ter o mesmo tipo de dado que a coluna salario, para que quando realizarmos a projeção, os dois dados estejam iguais, com a separação da casa decimal de maneira idêntica.
+   
+   Prosseguindo, agora é preciso inserir o conteúdo dos dados nesta nova coluna, para que sejam gravados os valores dos novos salários, reajustados. Como nós já criamos a coluna 'salario_reajustado', porém não inserindo qualquer dado, todos os valores das tuplas estão como NULL. Para inserir os dados nas tuplas de NULL, nós usaremos um comando básico, também de manipulação de dados, do MySQL. Este comando é o UPDATE, que realiza atualizações de valores em colunas já criadas dentro uma dada tabela. Além de usar um comando para inserir os novos valores na coluna 'salario_reajustado', também usaremos um operador SQL para que ele verifique os valores dos salarios, e decida quais salarios é preciso multiplicar, seguindo as nossas instruções. Este operador é chamado de CASE, e utilizaremos da seguinte maneira:
+    
+   UPDATE funcionario
+   SET salario_reajustado=
+   CASE WHEN salario < 35000 THEN salario * 1.20
+   WHEN salario >= 35000 THEN salario * 1.15
+   END;
+   
+   A maneira com o operador CASE funciona é decidida por condições especificadas dentro dele mesmo. Neste caso, as condições foram representadas pelas operações WHEN. 'When', na tradução literal para o português, significa 'Quando', o que sugere a ideia de uma condição, e é exatamente assim que as condições funcionam. Com esta estrutura de código, nós estamos dizendo ao comando UPDATE para que atualize a coluna 'salario_reajustado', para quando o valor do salario é menor que 35000, preencher a coluna com o valor resultado da operação matemática de aumento de 20 porcento, e quando é maior ou igual a 35000, preencher a coluna com um aumento de 15 porcento, apenas. Conclusivamente, agora é só projetarmos as informações que queríamos com o comando SELECT, lembrando de utilizar o CONCAT para realizar a junção dos nomes principais, do meio e ultimos nomes para que fique em apenas uma única coluna de nome completo:
+
+   SELECT CONCAT(primeiro_nome, " ", nome_meio, " ", ultimo_nome) AS "nome_completo", idade, salario, salario_reajustado
+   FROM funcionario;
+   
+   Sendo assim, projetando todos as informações necessárias para a resposta da questão.
+   
+   # Questão 5
+   
+   
