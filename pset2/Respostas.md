@@ -144,3 +144,11 @@ INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_
    WHERE NOT cpf_gerente = cpf
    ORDER BY salario desc) AS funcionario;
    
+   # Questão 6
+   
+   select *
+    -> from (select concat(primeiro_nome, " ", nome_meio, " ", ultimo_nome) as "nome_completo_funcionario"
+    -> from funcionario
+    -> inner join dependente on funcionario.cpf = dependente.cpf_funcionario)
+   
+   
