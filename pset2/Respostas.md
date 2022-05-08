@@ -40,9 +40,7 @@
   Depois de executar estes dois comandos, o MariaDB retornará valores sobre o resultado do cálculo, demonstrando que as médias são: 31.000,00 para as mulheres, e para os homens, 37.600,00.
   
 # Questão 3
-  
-  Para o Marne do futuro que ainda vai anotar a resposta no dia depois: É preciso realizar uma operação de junção de tabelas, a inner join, consistindo também na criação de uma coluna que liste a idade na tabela funcionario, assim como tem que calcular a idade dos funcionario subtraindo a data de nascimento deles com a data de hoje, utilizando o comando 'select datediff'. Além disso, também é necessário arredondar as idades por meio do comando 'select ceil(numero) from tabela'.
-  
+
   Para realizar uma projeção com todas estas informações, primeiro de tudo é preciso checar se todos os campos que queremos exibir estão, de fato, criados no banco de dados. Dando sequência, ao verificar se todos existem, notamos que não há a existência de um campo específico, que não estava originalmente no projeto do Elmasri, mas que é preciso para exibir a informação da idade dos funcionários. Portanto, como é necessário, executaremos o comando para a criação da coluna 'idade', dentro da tabela 'funcionario', do projeto do Elmasri, adicionando ao script:
   
   CREATE TABLE funcionario (
