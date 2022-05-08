@@ -146,9 +146,11 @@ INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_
    
    # Questão 6
    
-   select *
-    -> from (select concat(primeiro_nome, " ", nome_meio, " ", ultimo_nome) as "nome_completo_funcionario"
-    -> from funcionario
-    -> inner join dependente on funcionario.cpf = dependente.cpf_funcionario)
+   select concat(primeiro_nome, " ", nome_meio, " ", ultimo_nome) as nome_completo, nome_departamento, salario
+    from funcionario
+    left join dependente on dependente.cpf_funcionario = funcionario.cpf
+    inner join departamento on departamento.numero_departamento = funcionario.numero_departamento
+    where dependente.cpf_funcionario IS NULL;
+
    
    
