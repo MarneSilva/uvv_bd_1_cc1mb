@@ -108,4 +108,18 @@ INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_
    
    # Questão 5
    
-   
+   select departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo"
+    -> from departamento, funcionario
+    -> inner join funcionario.nome_completo on departamento.cpf_gerente = funcionario.cpf;
+
+   select departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo"
+    -> from departamento
+    -> inner join funcionario on departamento.cpf_gerente = funcionario.cpf
+    -> union distinct
+    -> select departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo" from funcionario, departamento;
+    
+    select distinct departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo"
+    -> from departamento
+    -> inner join funcionario on departamento.cpf_gerente = funcionario.cpf
+    -> union distinct
+    -> select distinct departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo" from funcionario, departamento;
