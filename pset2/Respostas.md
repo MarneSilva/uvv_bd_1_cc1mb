@@ -88,3 +88,9 @@ INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_
 
  Ideias para esta questão: create procedure Aumentar_Porcentagem(INOUT numero INT) begin set salario = salario * 0.35; end$$ delimiter;
  Uma procedure que aplica uma operação matemática em uma variável. Agora só falta saber como ativar a variável, e mostrar as condições de quando chamar.
+ 
+ 
+ 
+ 1° passo:
+ alter table funcionario
+    -> add column salario_reajustado varchar(50);
