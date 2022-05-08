@@ -108,18 +108,39 @@ INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_
    
    # Questão 5
    
-   select departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo"
-    -> from departamento, funcionario
-    -> inner join funcionario.nome_completo on departamento.cpf_gerente = funcionario.cpf;
+   Para obtermos os resultados necessários, é preciso realizar múltiplas seleções, entra elas, seleções de seleções com características um pouco mais especificas, para que os valores não se repitam quando não precisam se repetir em diferentes partes da coluna. A primeira seleção de uma seleção é feita para filtrar quais são os gerentes que trabalham em quais departamentos, e exibir esta informação em uma INNER JOIN que especifique as restrições. Desse modo, a seleção é feita deste jeito:
+   
+   SELECT *
+   FROM (SELECT CONCAT("Gerente do departamento ", departamento.nome_departamento) AS nome_departamento, CONCAT(funcionario.primeiro_nome, " ",funcionario.nome_meio, ". ",funcionario.ultimo_nome) AS nome_completo_funcionario
+   FROM departamento
+   INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_departamento
+   WHERE cpf_gerente = cpf
+   ORDER BY nome_departamento asc) AS gerente
 
-   select departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo"
-    -> from departamento
-    -> inner join funcionario on departamento.cpf_gerente = funcionario.cpf
-    -> union distinct
-    -> select departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo" from funcionario, departamento;
-    
-    select distinct departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo"
-    -> from departamento
-    -> inner join funcionario on departamento.cpf_gerente = funcionario.cpf
-    -> union distinct
-    -> select distinct departamento.nome_departamento, departamento.cpf_gerente, funcionario.cpf, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as "nome_completo" from funcionario, departamento;
+  Note que também é preciso especificar a ordem de exibição com o comando ORDER BY ao final deste código, para que seja cumprido a restrição da ordem, que a pergunta exige dentre as repostas. Note também que neste caso, o comando WHERE limita os resultados em que se encontrem na instância de que o cpf do gerente há de ser o mesmo que o cpf do funcionario, dessa maneira, permitindo a INNER JOIN a acontecer sem repetições de cpfs. Entrentanto, agora que selecionamos o que nós queremos deste comando SELECT, é preciso recuperar os resultados provenientes dele e juntar a outros resultados da segunda seleção, que ainda hei de mostrar. Sendo assim, apenas colocaremos um comando UNION, que junta os dois resultados de comandos SELECT, no meio entre eles:
+
+   UNION
+
+   Agora, para que a união seja feita, é preciso da outra parte do resultado de outro SELECT, sendo este o segundo a ser digitado. Este SELECT tem a função de agrupar as mesmas informações que o primeiro SELECT agrupou, porém, desta vez só é necessário exibir os cpfs que não são de gerentes, já que esta ação foi feita pelo primeiro comando SELECT. Deste modo:
+
+   SELECT *
+   FROM (SELECT departamento.nome_departamento, CONCAT(funcionario.primeiro_nome, " ", funcionario.nome_meio, ". ",funcionario.ultimo_nome) AS nome_completo_funcionario FROM departamento
+   INNER JOIN funcionario ON departamento.numero_departamento=funcionario.numero_departamento
+   WHERE NOT cpf_gerente = cpf
+   ORDER BY salario desc) AS funcionario;
+   
+   Por final, este SELECT também possui a função ORDER BY, entretanto agora configurado para projetar em ordem decrescente todos os salários da tabela funcionario. Além disso, como a função deste SELECT é exibir todos os restantes dos cpfs que não são de gerente, o comando WHERE retorna, mas desta vez, com a forma de WHERE NOT, para especificar a aplicação do SELECT apenas em tuplas em que a coluna cpf_gerente seja diferente de cpf, da tabela funcionario. Para concluir, basta apenas juntar os dois comandos de SELECT, e colocar o comando UNION bem no meio entre eles, para que assim seja feita a união e a projeção exigida:
+   
+   SELECT *
+   FROM (SELECT CONCAT("Gerente do departamento ", departamento.nome_departamento) AS nome_departamento, CONCAT(funcionario.primeiro_nome, " ",funcionario.nome_meio, ". ",funcionario.ultimo_nome) AS nome_completo_funcionario
+   FROM departamento
+   INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_departamento
+   WHERE cpf_gerente = cpf
+   ORDER BY nome_departamento asc) AS gerente
+   **UNION**  <---
+   SELECT *
+   FROM (SELECT departamento.nome_departamento, CONCAT(funcionario.primeiro_nome, " ", funcionario.nome_meio, ". ",funcionario.ultimo_nome) AS nome_completo_funcionario FROM departamento
+   INNER JOIN funcionario ON departamento.numero_departamento=funcionario.numero_departamento
+   WHERE NOT cpf_gerente = cpf
+   ORDER BY salario desc) AS funcionario;
+   
