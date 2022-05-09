@@ -146,11 +146,57 @@ INNER JOIN funcionario ON departamento.numero_departamento = funcionario.numero_
    
    # Questão 6
    
-   select concat(primeiro_nome, " ", nome_meio, " ", ultimo_nome) as nome_completo, nome_departamento, salario
-    from funcionario
-    left join dependente on dependente.cpf_funcionario = funcionario.cpf
-    inner join departamento on departamento.numero_departamento = funcionario.numero_departamento
-    where dependente.cpf_funcionario IS NULL;
+   A príncipio, é preciso selecionar todas as colunas de maneira com que seja especificadas as tabelas em que precisamos para exibir as informações. Portanto, é possível alcançar esta seleção com o comando SELECT, primordialmente presente no vocabulário do MySQL. Porém, é preciso também selecionar uma chave em comum para que dois conjuntos sejam identificados, já que ambas as seleções utilizam dados de múltiplas tabelas. Sendo assim, após listar todas as colunas que queremos exibir, junto ao SELECT, é preciso interligá-las com as chaves em comum, para que as informações se juntem na exibição.
+   
+   Geralmente, quando queremos de fato unir tabelas ou comandos SELECT uns com os outros, utilizamos o comando UNION, mas dessa maneira, existem informações que irão se repetir, e o comando UNION limita-nos a obrigatoriamente selecionar as mesmas quantidades de tabelas para que possamos prosseguir com a união. Porém, o mesmo resultado pode ser alcançado utilizando os comandos JOIN do MySQL, e nesse caso, para ligar as tabelas com suas chaves em comum, utilizamos a INNER JOIN, e a LEFT JOIN, de modo que estas estabelecem quais tabelas precisam ser ofuscadas na hora da exibição, mas que precisam estar ali para conectar as informações das tabelas.
+   
+   Infelizmente, não muito como destrinchar este código, uma vez que ele é a junção das JOINs com o comando SELECT e suas colunas selecionadas. Entretanto, é possível mostrar a estrutura, que possui o seguinte formato:  
+  
+  SELECT departamento.nome_departamento, CONCAT(funcionario.primeiro_nome, " ",funcionario.nome_meio, " ",funcionario.ultimo_nome) AS nome_completo_funcionario, CONCAT(dependente.nome_dependente, " ",funcionario.nome_meio, " ",funcionario.ultimo_nome) AS nome_completo_dependente, year(curdate()) - year(dependente.data_nascimento) AS idade_dependente,
+    CASE dependente.sexo
+           WHEN 'M' THEN 'Masculino'
+           WHEN 'F' THEN 'Feminino'
+     END AS sexo_dependente
+     FROM dependente
+LEFT JOIN funcionario ON (dependente.cpf_funcionario=funcionario.cpf)
+INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_departamento);
+
+   # Questão 7
+   
+   select departamento.nome_departamento, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo_funcionario, funcionario.salario from funcionario
+    -> left join dependente on funcionario.cpf = dependente.cpf_funcionario
+    -> inner join departamento on funcionario.numero_departamento = departamento.numero_departamento
+    -> where dependente.cpf_funcionario is null;
+
+
+
+
+
+
+
+
+
+
+
+
+    # Questão 8
+    
+    select * from
+    (select da sum(de um select que tenha apenas o número de horas trabalhadas por cada funcionario))
+    
+    
+    select concat("Departamento ", departamento.numero_departamento, " ", departamento.nome_departamento) as departamento_e_nome, projeto.nome_projeto, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo_funcionario, trabalha_em.horas from funcionario
+    -> inner join departamento on funcionario.numero_departamento = departamento.numero_departamento
+    -> inner join projeto as p on departamento.numero_departamento = p.numero_departamento
+    -> inner join trabalha_em on funcionario.cpf = trabalha_em.cpf_funcionario
+    -> inner join projeto on trabalha_em.numero_projeto = projeto.numero_projeto
+    -> where funcionario.numero_departamento = projeto.numero_departamento; ---> código que dá 22 rows, com repetidas.
+   
+    
+  
+  
+  
+  
 
    
    
