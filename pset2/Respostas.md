@@ -163,10 +163,33 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
 
    # Questão 7
    
-   select departamento.nome_departamento, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo_funcionario, funcionario.salario from funcionario
-    -> left join dependente on funcionario.cpf = dependente.cpf_funcionario
-    -> inner join departamento on funcionario.numero_departamento = departamento.numero_departamento
-    -> where dependente.cpf_funcionario is null;
+   SELECT departamento.nome_departamento, CONCAT(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) AS nome_completo_funcionario,
+   funcionario.salario FROM funcionario
+   LEFT JOIN dependente ON funcionario.cpf = dependente.cpf_funcionario
+   INNER JOIN departamento ON funcionario.numero_departamento = departamento.numero_departamento
+   WHERE dependente.cpf_funcionario IS null;
+
+   # Questão 8
+   
+   SELECT CONCAT("Departamento ", departamento.numero_departamento, " ", departamento.nome_departamento) AS departamento_e_nome, projeto.nome_projeto,
+   CONCAT(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) AS nome_completo_funcionario, trabalha_em.horas FROM funcionario
+   INNER JOIN departamento ON funcionario.numero_departamento = departamento.numero_departamento
+   INNER JOIN projeto AS p ON departamento.numero_departamento = p.numero_departamento
+   INNER JOIN trabalha_em ON funcionario.cpf = trabalha_em.cpf_funcionario
+   INNER JOIN projeto ON trabalha_em.numero_projeto = projeto.numero_projeto
+   WHERE funcionario.numero_departamento = projeto.numero_departamento
+   GROUP BY departamento_e_nome, nome_projeto, nome_completo_funcionario, horas;
+
+   # Questão 9
+   
+   SELECT DISTINCT departamento.nome_departamento, projeto.nome_projeto, sum(trabalha_em.horas) AS soma_das_horas FROM (departamento, projeto, trabalha_em)
+   INNER JOIN departamento AS d ON (projeto.numero_departamento = d.numero_departamento)
+   INNER JOIN trabalha_em AS tb ON (projeto.numero_projeto = tb.numero_projeto)
+   GROUP BY nome_projeto, nome_departamento;
+   
+   # Questão 10
+   
+   
 
 
 
@@ -179,18 +202,7 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
 
 
 
-    # Questão 8
-    
-    select * from
-    (select da sum(de um select que tenha apenas o número de horas trabalhadas por cada funcionario))
-    
-    
-    select concat("Departamento ", departamento.numero_departamento, " ", departamento.nome_departamento) as departamento_e_nome, projeto.nome_projeto, concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo_funcionario, trabalha_em.horas from funcionario
-    -> inner join departamento on funcionario.numero_departamento = departamento.numero_departamento
-    -> inner join projeto as p on departamento.numero_departamento = p.numero_departamento
-    -> inner join trabalha_em on funcionario.cpf = trabalha_em.cpf_funcionario
-    -> inner join projeto on trabalha_em.numero_projeto = projeto.numero_projeto
-    -> where funcionario.numero_departamento = projeto.numero_departamento; ---> código que dá 22 rows, com repetidas.
+   
    
     
   
