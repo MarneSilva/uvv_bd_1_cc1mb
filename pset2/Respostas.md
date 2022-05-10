@@ -189,6 +189,14 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
    
    # Questão 10
    
+   Esta questão está repetida. Portanto, eu vou responder da mesma maneira que eu consegui responder a questão que é igual a esta, a qual seria a de n° 1.
+   
+   O comando que responde a questão é exatamente este, mas para saber da explicação, recomenda-se lê-la na resposta 1:
+   
+   select avg(salario) from funcionario;
+   
+   # Questão 11
+   
    
 
 
