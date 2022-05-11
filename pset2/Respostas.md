@@ -4,11 +4,10 @@
 
   É possível tirar a média dos salários da tabela funcionário por meio do comando avg (average), embutido no MySQL. Sendo assim, acionaremos ele utilizando a estrutura do comando: select avg(coluna) from tabela. Inserindo as informações na estrutura, formará o seguinte comando: select avg(salario) from funcionario. Posterior à isso, o MariaDB retornará o seguinte resultado: 
   
-+--------------+
-| avg(salario) |
-+--------------+
-| 35125.000000 |
-+--------------+
+|                 avg(salario)                                              |
+|---------------------------------------------------------------------------|
+|     35125.000000                                                          |
+
   
   Demonstrando assim que a média salarial é de exatamente 35.125,00.
   
@@ -235,8 +234,7 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
   group by departamento.numero_departamento;
    
 
-
-
+# Questão 15
 
 
 
