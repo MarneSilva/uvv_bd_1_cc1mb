@@ -197,6 +197,23 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
    
    # Questão 11
    
+   select concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo_funcionario, projeto.nome_projeto,
+   trabalha_em.horas, sum(trabalha_em.horas)*0.50 as recebimento_horas from (funcionario, projeto, trabalha_em)
+   inner join departamento as d on (projeto.numero_departamento = d.numero_departamento)
+   inner join trabalha_em as tb on (projeto.numero_projeto = tb.numero_projeto)
+   where funcionario.cpf = trabalha_em.cpf_funcionario
+   group by nome_completo_funcionario, nome_projeto, nome_departamento, horas;
+   
+   # Questão 12
+   
+   select concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo, departamento.nome_departamento,
+   projeto.nome_projeto from (funcionario, departamento, projeto)
+   inner join funcionario as f on (departamento.cpf_gerente = f.cpf)
+   inner join projeto as p on (departamento.numero_departamento = p.numero_departamento)
+   inner join trabalha_em as tb on (p.numero_projeto = tb.numero_projeto)
+   where tb.horas = 0.0 and funcionario.cpf = tb.cpf_funcionario
+   group by projeto.nome_projeto, departamento.nome_departamento, nome_completo;
+   
    
 
 
