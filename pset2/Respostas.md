@@ -235,21 +235,6 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
 
    # Questão 15
 
-
-
-
-
-
-
-
-
-   
-   
-    
-  
-  
-  
-  
-
-   
-   
+   select concat(f.primeiro_nome, " ", f.nome_meio, " ", f.ultimo_nome) as nome_completo, concat("Departamento ", d.numero_departamento, " ", d.nome_departamento) as
+   departamento, concat("Projeto N° ", p.numero_projeto, " ", p.nome_projeto) as projeto from (departamento as d) inner join projeto as p inner join trabalha_em as tb
+   inner join funcionario as f where d.numero_departamento = f.numero_departamento and p.numero_projeto = tb.numero_projeto and tb.cpf_funcionario = f.cpf;
