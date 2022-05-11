@@ -224,6 +224,10 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
    group by nome_completo_funcionario, nome_completo_dependente, idade_funcionario, idade_dependente
    order by idade_funcionario desc, idade_dependente desc;
    
+   # Questão 14
+   
+   Ideias: usar um select em um count, que é diferente para cada cpf de funcionario de cada departamento.
+   
 
 
 
