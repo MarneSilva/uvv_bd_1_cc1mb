@@ -225,16 +225,15 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
    
    # Questão 14
    
-  P.S: chupa Caio =)
-  
-  select concat("Departamento ", departamento.numero_departamento, " ", departamento.nome_departamento) as departamento, count(funcionario.cpf) as
-  numero_de_funcionarios from (departamento, funcionario)
-  inner join funcionario as f on (departamento.numero_departamento = f.numero_departamento)
-  where funcionario.cpf = departamento.cpf_gerente
-  group by departamento.numero_departamento;
+   
+   select concat("Departamento ", departamento.numero_departamento, " ", departamento.nome_departamento) as departamento, count(funcionario.cpf) as
+   numero_de_funcionarios from (departamento, funcionario)
+   inner join funcionario as f on (departamento.numero_departamento = f.numero_departamento)
+   where funcionario.cpf = departamento.cpf_gerente
+   group by departamento.numero_departamento;
    
 
-# Questão 15
+   # Questão 15
 
 
 
