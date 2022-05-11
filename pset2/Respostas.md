@@ -226,7 +226,13 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
    
    # Questão 14
    
-   Ideias: usar um select em um count, que é diferente para cada cpf de funcionario de cada departamento.
+  P.S: chupa Caio =)
+  
+  select concat("Departamento ", departamento.numero_departamento, " ", departamento.nome_departamento) as departamento, count(funcionario.cpf) as
+  numero_de_funcionarios from (departamento, funcionario)
+  inner join funcionario as f on (departamento.numero_departamento = f.numero_departamento)
+  where funcionario.cpf = departamento.cpf_gerente
+  group by departamento.numero_departamento;
    
 
 
