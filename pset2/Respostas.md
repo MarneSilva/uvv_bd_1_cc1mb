@@ -214,6 +214,15 @@ INNER JOIN departamento ON (funcionario.numero_departamento=departamento.numero_
    where tb.horas = 0.0 and funcionario.cpf = tb.cpf_funcionario
    group by projeto.nome_projeto, departamento.nome_departamento, nome_completo;
    
+   # Questão 13
+   
+   select concat(funcionario.primeiro_nome, " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo_funcionario, concat(dependente.nome_dependente,
+   " ", funcionario.nome_meio, " ", funcionario.ultimo_nome) as nome_completo_dependente, funcionario.sexo as sexo_funcionario, dependente.sexo as sexo_dependente,
+   concat(funcionario.idade, " anos") as idade_funcionario,  concat(year(curdate())-year(dependente.data_nascimento)," anos") as idade_dependente from (funcionario,
+   dependente)
+   inner join dependente as d on (funcionario.cpf = d.cpf_funcionario)
+   group by nome_completo_funcionario, nome_completo_dependente, idade_funcionario, idade_dependente
+   order by idade_funcionario desc, idade_dependente desc;
    
 
 
