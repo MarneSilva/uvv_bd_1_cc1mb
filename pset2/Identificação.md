@@ -10,4 +10,4 @@
 
 **Turma:** CC1Mb
 
-Para encontrar o arquivo que é composto das respostas, basta abrir a pasta 'pset2' e procuracar pelo arquivo nomeado 'Respostas.sql' na lista de conteúdo exibida pelo GitHub.
+Para encontrar o arquivo que é composto das respostas, basta abrir a pasta 'pset2' e procurar pelo arquivo nomeado 'Respostas.sql' na lista de conteúdo exibida pelo GitHub.
